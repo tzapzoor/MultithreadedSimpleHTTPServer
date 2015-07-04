@@ -19,10 +19,14 @@ import os
 if sys.argv[1:]:
     port = int(sys.argv[1])
 else:
-    port = 8000
+    port = 80
+
+print '\n>>> Starting HTTP Server on port ' + str(port)
 
 if sys.argv[2:]:
     os.chdir(sys.argv[2])
+
+print '>>> Directory to share: ' + os.getcwd()
 
 server = ThreadingSimpleServer(('', port), SimpleHTTPRequestHandler)
 try:
@@ -30,4 +34,4 @@ try:
         sys.stdout.flush()
         server.handle_request()
 except KeyboardInterrupt:
-    print("Finished")
+    print '\nServer has stopped!'
